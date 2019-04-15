@@ -26,7 +26,7 @@ export default (state=initialState, action) => {
             ]
         }
 
-        case StoryAction.UPDATE_STORY: 
+        case StoryAction.PUT_STORY: 
         return {
             stories: [
                 ...state.stories.slice(0, action.index),
