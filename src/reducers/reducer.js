@@ -9,6 +9,7 @@ const initialState = {
 export default (state=initialState, action) => {
     switch(action.type) {
         case StoryAction.GET_STORY: 
+        console.log(action)
         return {
             stories: action.stories
         }

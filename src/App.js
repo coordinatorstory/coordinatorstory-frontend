@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, NavLink, Route  } from 'react-router-dom';
 
+import Stories from './components/Stories'
 
 import './App.css';
 
-const Stories = props => (
-  <div>Stories</div>
-)
 
 class App extends Component {
   render() {
