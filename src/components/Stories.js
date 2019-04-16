@@ -10,14 +10,15 @@ class Stories extends React.Component {
     constructor() {
         super()
         this.state={
-            countries: 'Bolivia, , Brazil, Cambodia, Colombia, Ecuador, El Salvador, Ghana, Guatemala, Haiti, Honduras, Kiribati, Madagascar, Mongolia, Nicaragua, Paraguay, Peru, Philippines, Sierra Leone, Zimbabwe'
+            countries: ["Bolivia", "Brazil", "Cambodia", "Colombia", "Ecuador", "El Salvador", "Ghana", "Guatemala", "Haiti", "Honduras", "Kiribati", "Madagascar", "Mongolia", "Nicaragua", "Paraguay", "Peru", "Philippines", "Sierra Leone", "Zimbabwe"]
         }
     }
 
     render = () => (
         <div className='stories-container'>
             <select>
-                <option>Bolivia</option>, Brazil, Cambodia, Colombia, Ecuador, El Salvador, Ghana, Guatemala, Haiti, Honduras, Kiribati, Madagascar, Mongolia, Nicaragua, Paraguay, Peru, Philippines, Sierra Leone, Zimbabwe</select>
+                {this.state.countries.map(country => <option>{country}</option>)}
+            </select>
             <ul className='stories-list'>
                 {
                     this.props.stories.map(story => (
