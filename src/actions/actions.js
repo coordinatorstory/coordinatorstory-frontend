@@ -4,6 +4,7 @@ export const GET_STORY = 'GET_STORY';
 export const POST_STORY = 'POST_STORY';
 export const DELETE_STORY = 'DELETE_STORY';
 export const PUT_STORY = 'PUT_STORY';
+export const FILTER_STORY = 'FILTER_STORY'
 
 export const getStory = stories  => {
     return {
@@ -31,5 +32,12 @@ export const putStory = (index, story) => {
         type: PUT_STORY,
         index,
         story
+    }
+}
+
+export const filterStory = country => {
+    return {
+        type: FILTER_STORY,
+        country
     }
 }
