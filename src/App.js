@@ -9,7 +9,15 @@ import './App.css';
 import { getStory } from './actions/actions'
 import { connect } from 'react-redux'
 
+import coordinatorWrapper from './utils/coordinatorWrapper'
+
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      loggedIn: false
+    }
+  }
   componentDidMount = () => {
     this.props.getStory(
       [
@@ -41,12 +49,14 @@ class App extends Component {
   }
   render() {
     console.log(this.props)
+    // const story = <Story {...props} { ...this.props}/>
     return (
       <Router>
         <div className="App">
           <NavLink to='/'>Home</NavLink>
           <Route exact path='/' component={Stories} />
-          <Route path={`/stories/:id`} render={props => <Story {...props} { ...this.props}/>}/>
+          <Route path={`/stories/:id`} render={props => <Story {...props} {...this.props}/>}/>
+          <Route path={`/stories`} render={props => coordinatorWrapper(props)(Stories)} />
         </div>
       </Router>
     );
