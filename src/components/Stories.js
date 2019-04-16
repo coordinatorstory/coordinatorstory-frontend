@@ -1,30 +1,20 @@
 import React from 'react'
+
+import Story from './Story'
 import { getStory } from '../actions/actions'
 import { connect } from 'react-redux'
+import { NavLink, Route, Link  } from 'react-router-dom'
+
 class Stories extends React.Component {
-    // constructor() {
-    //     super()
-    // }
-
-    componentDidMount = () => {
-        this.props.getStory(
-            [{
-                title: "My niece needs your help",
-                country: "USA",
-                description: "My niece is in the hospital, please help her with his medical fee",
-                date: Date()
-            }]
-        )
-
-        
-        console.log(this.props)
-    }
-
-    render = props => (
-        <div>Stories
+    render = () => (
+        <div className='Stories'>   
             {
                 this.props.stories.map(story => (
-                    <div>{story.title}</div>
+                    <div className='story-preview' key={story.id}>
+                        <h3>{story.title}</h3>
+                        <p>{story.description}</p>
+                        <Link to={`/stories/${story.id}`}>Continue Reading</Link>
+                    </div>
                 ))
             }
         </div>

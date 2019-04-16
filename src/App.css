@@ -1,5 +1,28 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+}
+
+
+/* Stories */
+.Stories {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+
+/* Story */
+
+.Story {
+  width: 30%;
+}
+
+.Story p {
+  overflow: hidden;
+}
+
+.Story * {
+  padding: 5px;
 }
 
 
