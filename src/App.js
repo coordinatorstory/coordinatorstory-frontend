@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, NavLink, Route  } from 'react-router-dom';
+import { BrowserRouter as Router, NavLink, Route, Redirect  } from 'react-router-dom';
 
 import Stories from './components/Stories'
 import Story from './components/Story'
@@ -54,9 +54,13 @@ class App extends Component {
       <Router>
         <div className="App">
           <NavLink to='/'>Home</NavLink>
-          <Route exact path='/' component={Stories} />
+          <NavLink to='/login'>Log In</NavLink>
+          <NavLink to='/signup'>Sign Up</NavLink>
+
+          <Route exact path='/' render={() => <Redirect to='/stories' />} />
+          <Route exact path='/stories' component={Stories} />
           <Route path={`/stories/:id`} render={props => <Story {...props} {...this.props}/>}/>
-          <Route path={`/stories`} render={props => coordinatorWrapper(props)(Stories)} />
+          {/* <Route path={`/stories`} render={props => coordinatorWrapper(props)(Stories)} /> */}
         </div>
       </Router>
     );

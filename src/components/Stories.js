@@ -6,17 +6,29 @@ import { connect } from 'react-redux'
 import { NavLink, Route, Link  } from 'react-router-dom'
 
 class Stories extends React.Component {
+
+    constructor() {
+        super()
+        this.state={
+            countries: 'Bolivia, , Brazil, Cambodia, Colombia, Ecuador, El Salvador, Ghana, Guatemala, Haiti, Honduras, Kiribati, Madagascar, Mongolia, Nicaragua, Paraguay, Peru, Philippines, Sierra Leone, Zimbabwe'
+        }
+    }
+
     render = () => (
-        <div className='Stories'>   
-            {
-                this.props.stories.map(story => (
-                    <div className='story-preview' key={story.id}>
-                        <h3>{story.title}</h3>
-                        <p>{story.description}</p>
-                        <Link to={`/stories/${story.id}`}>Continue Reading</Link>
-                    </div>
-                ))
-            }
+        <div className='stories-container'>
+            <select>
+                <option>Bolivia</option>, Brazil, Cambodia, Colombia, Ecuador, El Salvador, Ghana, Guatemala, Haiti, Honduras, Kiribati, Madagascar, Mongolia, Nicaragua, Paraguay, Peru, Philippines, Sierra Leone, Zimbabwe</select>
+            <ul className='stories-list'>
+                {
+                    this.props.stories.map(story => (
+                        <li className='story-preview' key={story.id}>
+                            <h3>{story.title}</h3>
+                            <p>{story.description}</p>
+                            <Link to={`/stories/${story.id}`}>Continue Reading</Link>
+                        </li>
+                    ))
+                }
+            </ul>
         </div>
     )
 }
