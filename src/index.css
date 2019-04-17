@@ -15,4 +15,9 @@ code {
 
 :root {
   --blue: #8aaae5;
+  background: #8aaae5;
+}
+
+body {
+  margin: 0px;
 }
