@@ -3,11 +3,13 @@ const DONOR = 'DONOR';
 const COORDINATOR = 'COORDINATOR';
 const initialState = {
     stories: [],
+    isFetching: false,
+    error: '',
     filteredStories: [],
     roles: DONOR,
 }
 
-export default (state=initialState, action) => {
+const staticReducer = (state=initialState, action) => {
     switch(action.type) {
         case StoryAction.GET_STORY: 
         console.log(action)
@@ -51,3 +53,35 @@ export default (state=initialState, action) => {
         return state
     }
 }
+
+
+const reducer = (state=initialState, action) => {
+    switch(action.type) {
+        case StoryAction.FETCH_STORY_START: 
+        console.log(action)
+        return {
+            ...state,
+            error: '',
+            isFetching: true
+        }
+
+        case StoryAction.FETCH_STORY_SUCCESS: 
+        return {
+            stories: action.payload,
+            error: '',
+            isFetching: false
+        }
+
+        case StoryAction.FETCH_STORY_FAILURE: 
+        return {
+            ...state,
+            error: 'Failed to get stories, please try again!',
+            isFetching: false
+        }
+
+        default:
+        return state
+    }
+}
+
+export default reducer

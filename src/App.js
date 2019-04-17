@@ -7,7 +7,7 @@ import Register from './components/Register'
 
 import './App.css';
 
-import { getStory, filterStory } from './actions/actions'
+import { getStory, fetchStory } from './actions/actions'
 import { connect } from 'react-redux'
 
 import coordinatorWrapper from './utils/coordinatorWrapper'
@@ -24,7 +24,7 @@ class App extends Component {
     }
   }
   componentDidMount = () => {
-    this.props.getStory(
+    this.props.fetchStory(
       [
         {
             id: 1,
@@ -103,6 +103,6 @@ const mapStatetoProps = state => ({
   stories: state.stories,
 })
 
-export default connect(mapStatetoProps, { getStory, filterStory })(App)
+export default connect(mapStatetoProps, { getStory, fetchStory })(App)
 
 // export default App;
