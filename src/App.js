@@ -3,6 +3,7 @@ import { BrowserRouter as Router, NavLink, Route, Redirect  } from 'react-router
 
 import Stories from './components/Stories'
 import Story from './components/Story'
+import Register from './components/Register'
 
 import './App.css';
 
@@ -76,8 +77,21 @@ class App extends Component {
           render={() => this.state.signedIn ? 
           <div>"hello"</div> : 
           <Redirect to='/stories' />} />
-          <Route exact path='/stories' render={props => <Stories {...props} {...this.props} {...this.state} />} />
-          <Route path={`/stories/:id`} render={props => <Story {...props} {...this.props}/>}/>
+          <Route 
+          exact path='/stories' 
+          render={
+            props => <Stories 
+            {...props} 
+            {...this.props} 
+            {...this.state}
+            filterStoriesByCountry={this.filterStoriesByCountry} />} 
+          />
+          <Route path='/stories/:id' render={props => <Story {...props} {...this.props}/>}/>
+          {/* <Route path='/login' */}
+          <Route path='/signup' redner={ props => this.state.signedIn ?
+          <Redirect to='/' /> :
+          <Register {...props} {...this.state} />
+          }/>
           {/* <Route path={`/stories`} render={props => coordinatorWrapper(props)(Stories)} /> */}
         </div>
       </Router>
