@@ -4,8 +4,12 @@ const Register = props => {
     console.log("hi")
     return (
     <div>
-        <h1>Create Your Account</h1>
-
+        <h1>Let's Create Your Profile!</h1>
+        <form>
+            <input type='text' />
+            <input type='password'/>
+            <button>Done</button>
+        </form>
     </div>)
 }
 

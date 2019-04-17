@@ -64,11 +64,10 @@ class App extends Component {
           />
           <Route path='/stories/:id' render={props => <Story {...props} {...this.props}/>}/>
           {/* <Route path='/login' */}
-          <Route path='/signup' redner={ props => this.state.signedIn ?
+          <Route path='/signup' render={ props => this.state.signedIn ?
           <Redirect to='/' /> :
           <Register {...props} {...this.state} />
           }/>
-          {/* <Route path={`/stories`} render={props => coordinatorWrapper(props)(Stories)} /> */}
         </div>
       </Router>
     );
