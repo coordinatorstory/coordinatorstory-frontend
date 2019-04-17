@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { getStory, fetchStory } from '../actions/actions'
+import { register } from '../actions/register'
 import { connect } from 'react-redux'
 
 class Register extends React.Component {
@@ -10,8 +10,8 @@ class Register extends React.Component {
             username: "",
             email: "",
             password: "",
-            firstName: "",
-            lastName: "",
+            first_name: "",
+            last_name: "",
         }
     }
 
@@ -22,7 +22,16 @@ class Register extends React.Component {
     }
 
     register = event => {
+        event.preventDefault()
+        this.props.register(this.state)
 
+        // this.setState({
+        //     username: "",
+        //     email: "",
+        //     password: "",
+        //     first_name: "",
+        //     last_name: "",
+        // })
     }
 
     render = () => {
@@ -35,9 +44,9 @@ class Register extends React.Component {
                     type='text'
                     placeholder='First Name' 
                     required
-                    value={this.state.firstName}
+                    value={this.state.first_name}
                     onChange={this.editRegisterForm}
-                    name='firstName'
+                    name='first_name'
                 />
 
                 
@@ -45,9 +54,9 @@ class Register extends React.Component {
                     type='text'
                     placeholder='Last Name' 
                     required
-                    value={this.state.lastName}
+                    value={this.state.last_name}
                     onChange={this.editRegisterForm}
-                    name='lastName'
+                    name='last_name'
                 />
 
                 <input 
@@ -80,14 +89,19 @@ class Register extends React.Component {
                 />
                 <button onClick={this.register}>Done</button>
             </form>
+
+            <p>{this.props.message}</p>
         </div>)
     }
 }
 
 
 const mapStatetoProps = state => ({
-    stories: state.stories,
+    message: state.register.message,
+    token: state.register.token,
+    isRegistering: state.register.isRegistering,
+    error: state.register.error,
 })
   
-export default connect(mapStatetoProps, { getStory, fetchStory })(Register)
+export default connect(mapStatetoProps, { register })(Register)
 

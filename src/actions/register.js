@@ -4,22 +4,28 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 export const REGISTER_FAILURE = 'REGISTER_FAILURE'
 
 export const register = newUser => dispatch => {
+    console.log(newUser)
     dispatch({
         type: REGISTER_START
     });
     Axios
     .post('https://ourstory-api.herokuapp.com/api/auth/register', newUser)
     .then(res => {
+        console.dir(res)
         dispatch({
             type: REGISTER_SUCCESS,
-            message: res.message,
-            token: res.token
+            message: res.data.message,
+            status: res.status,
+            token: res.data.token
         })
     })
-    .catch(error => {
+    .catch(err => {
+        console.dir(err)
         dispatch({
             type: REGISTER_FAILURE,
-            payload: error
+            message: err.message,
+            error: err.response ? err.response.data.error : 'unknown error, please try again',
+            status: err.response ? err.response.status : 'unknown status'
         })
     })
 } 
