@@ -1,19 +1,20 @@
 import Axios from 'axios'
-export const REGISTER_START = 'REGISTER_START'
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
-export const REGISTER_FAILURE = 'REGISTER_FAILURE'
+export const LOGIN_START = 'LOGIN_START'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 
-export const register = newUser => dispatch => {
-    console.log(newUser)
+export const login = user => dispatch => {
+    // console.log(newUser)
     dispatch({
-        type: REGISTER_START
+        type: LOGIN_START
     });
-    Axios
-    .post('https://ourstory-api.herokuapp.com/api/auth/register', newUser)
+    
+    Axios.post('https://ourstory-api.herokuapp.com/api/auth/login', user)
     .then(res => {
         console.dir(res)
+        
         dispatch({
-            type: REGISTER_SUCCESS,
+            type: LOGIN_SUCCESS,
             message: res.data.message,
             status: res.status,
             token: res.data.token
@@ -21,8 +22,9 @@ export const register = newUser => dispatch => {
     })
     .catch(err => {
         console.dir(err)
+        
         dispatch({
-            type: REGISTER_FAILURE,
+            type: LOGIN_FAILURE,
             message: err.message,
             error: err.response ? err.response.data.error : 'unknown error, please try again',
             status: err.response ? err.response.status : 'unknown status'

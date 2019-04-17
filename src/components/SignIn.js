@@ -1,8 +1,8 @@
 import React from 'react'
 import Axios from 'axios';
-// import './styles/Register.css'
-// import { register } from '../actions/register'
-// import { connect } from 'react-redux'
+import './styles/Register.css'
+import { login } from '../actions/login'
+import { connect } from 'react-redux'
 
 class SignIn extends React.Component {
     constructor() {
@@ -21,13 +21,7 @@ class SignIn extends React.Component {
 
     signIn = event => {
         event.preventDefault()
-        Axios.post('https://ourstory-api.herokuapp.com/api/auth/login', this.state)
-        .then(res => {
-            console.dir(res)
-        })
-        .catch(error => {
-            console.dir(error.response.data.error)
-        })
+        this.props.login(this.state)
     }
     
     render = props => {
@@ -66,14 +60,13 @@ class SignIn extends React.Component {
 }
 
 
-// const mapStatetoProps = state => ({
-//     message: state.register.message,
-//     token: state.register.token,
-//     isRegistering: state.register.isRegistering,
-//     error: state.register.error,
-//     status: state.register.status
-// })
+const mapStatetoProps = state => ({
+    message: state.login.message,
+    token: state.login.token,
+    isLoggingIn: state.login.isLoggingIn,
+    error: state.login.error,
+    status: state.login.status,
+})
   
-// export default connect(mapStatetoProps, { register })(Register)
+export default connect(mapStatetoProps, { login })(SignIn)
 
-export default SignIn
