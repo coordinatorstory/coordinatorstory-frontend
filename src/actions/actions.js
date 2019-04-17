@@ -36,8 +36,9 @@ export const putStory = (index, story) => {
 }
 
 export const filterStory = country => {
+    console.log(country)
     return {
         type: FILTER_STORY,
-        country
+        selectedCountry: country
     }
 }

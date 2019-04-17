@@ -3,7 +3,8 @@ const DONOR = 'DONOR';
 const COORDINATOR = 'COORDINATOR';
 const initialState = {
     stories: [],
-    roles: COORDINATOR
+    filteredStories: [],
+    roles: DONOR,
 }
 
 export default (state=initialState, action) => {
@@ -11,7 +12,7 @@ export default (state=initialState, action) => {
         case StoryAction.GET_STORY: 
         console.log(action)
         return {
-            stories: action.stories
+            stories: action.stories,
         }
 
         case StoryAction.POST_STORY: 
@@ -34,6 +35,16 @@ export default (state=initialState, action) => {
                 action.story,
                 ...state.stories.slice(action.index)
             ]
+        }
+
+        case StoryAction.FILTER_STORY:
+        console.log(action.selectedCountry)
+        if (action.selectedCountry === 'All') {
+            return { ...state, stories: state.stories }
+        }
+        else {
+            console.log(state.stories.filter(story => story.country === action.selectedCountry))
+            return { ...state, filteredStories: state.stories.filter(story => story.countries === action.selectedCountry) }
         }
 
         default:
