@@ -6,7 +6,7 @@ import { NavLink, Route, Link  } from 'react-router-dom'
 const Story = props => {
     const { match : { params :{ id: index} }, stories } = props;
     return stories.filter(story => story.id == index).map(story => (
-        <div key={story.title}>
+        <div key={story.title} className='story-view'>
             <h3>{story.title}</h3>
             <p>{story.description}</p>
             <form 
