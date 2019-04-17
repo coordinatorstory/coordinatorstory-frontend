@@ -24,13 +24,6 @@ class Register extends React.Component {
     register = event => {
         event.preventDefault()
         this.props.register(this.state)
-        // if (this.props.status === 201) this.setState({
-        //     username: "",
-        //     email: "",
-        //     password: "",
-        //     first_name: "",
-        //     last_name: "",
-        // })
     }
 
     render = () => {

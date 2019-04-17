@@ -1,9 +1,9 @@
-.register-view {
+.register-view, .signin-view {
     text-align: center;
 
 }
 
-.register-view form {
+.register-view form, .signin-view  form {
     display: flex;
     justify-content: space-evenly;
     align-items: stretch;
@@ -15,6 +15,6 @@
     margin: auto;
 }
 
-.register-view form input, button, p {
+.register-view form input, button, p , .signin-view form input, button, p  {
     padding: 10px;
 }

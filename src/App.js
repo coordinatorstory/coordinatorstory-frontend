@@ -9,6 +9,7 @@ import './App.css';
 
 import { getStory, fetchStory } from './actions/actions'
 import { connect } from 'react-redux'
+import SignIn from './components/SignIn';
 
 
 class App extends Component {
@@ -23,8 +24,6 @@ class App extends Component {
   }
   componentDidMount = () => {
     this.props.fetchStory()
-    // console.log(this.props.stories)
-    // this.setState({filteredStories: this.props.stories})
   }
 
   filterStoriesByCountry = event => {
@@ -60,12 +59,18 @@ class App extends Component {
             {...this.state}
             filterStoriesByCountry={this.filterStoriesByCountry} />} 
           />
-          <Route path='/stories/:id' render={props => <Story {...props} {...this.props}/>}/>
-          {/* <Route path='/login' */}
+          <Route path='/stories/:id' render={props => <Story {...props} {...this.props}/>}/> 
           <Route path='/signup' render={ props => this.state.signedIn ?
-          <Redirect to='/' /> :
-          <Register {...props} {...this.state} />
+            <Redirect to='/' /> :
+            <Register {...props} {...this.state} />
           }/>
+
+          
+          
+          <Route path='/login' render={ props => this.state.signedIn ?
+            <Redirect to='/' /> :
+            <SignIn {...props} {...this.state} />
+          } />
         </div>
       </Router>
     );
