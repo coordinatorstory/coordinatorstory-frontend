@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './styles/Register.css'
 import { register } from '../actions/register'
 import { connect } from 'react-redux'
 
@@ -23,7 +23,7 @@ class Register extends React.Component {
 
     register = event => {
         event.preventDefault()
-        // this.props.register(this.state)
+        this.props.register(this.state)
         // if (this.props.status === 201) this.setState({
         //     username: "",
         //     email: "",
@@ -37,10 +37,9 @@ class Register extends React.Component {
         console.log(this.props.status)
 
         return (
-        <div>
+        <div className="register-view">
             <h1>Let's Create Your Profile!</h1>
             <form>
-                
                 <input 
                     type='text'
                     placeholder='First Name' 
@@ -49,8 +48,6 @@ class Register extends React.Component {
                     onChange={this.editRegisterForm}
                     name='first_name'
                 />
-
-                
                 <input 
                     type='text'
                     placeholder='Last Name' 
