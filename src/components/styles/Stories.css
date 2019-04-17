@@ -1,0 +1,58 @@
+/* Stories */
+.stories-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+}
+ul {
+    padding: 0px;
+}
+
+li {
+    list-style: none;
+    padding: 20px;
+    margin: 20px;
+    color: #313131;
+}
+  
+li a {
+    color: #8aaae5;
+    text-shadow: none;
+}
+
+
+.story-preview {
+    font-family: sans-serif;
+    background: white;
+    width: 30%;
+    min-width: 300px;
+}
+.story-preview a {
+    float: right;
+}
+.story-preview a::before {
+    content: '...';
+}
+
+.story-preview p {
+    line-height: 1.5;
+    overflow: hidden;
+    height: 50px;
+
+}
+
+.Story p {
+    overflow: hidden;
+}
+
+
+.stories-list .Stories{
+    display: block;
+}
+
+
+.story-preview h3 {
+    text-align: center;
+}

@@ -25,7 +25,8 @@ const register = (state=initialState, action) => {
             message: action.message,
             token: action.token,
             error: '',
-            isRegistering: false
+            isRegistering: false,
+            status: action.status
         }
 
         case REGISTER_FAILURE: 

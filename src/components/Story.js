@@ -1,11 +1,9 @@
 import React from 'react'
-import { getStory } from '../actions/actions'
-import { connect } from 'react-redux'
-import { NavLink, Route, Link  } from 'react-router-dom'
+import './styles/Story.css'
 
 const Story = props => {
     const { match : { params :{ id: index} }, stories } = props;
-    return stories.filter(story => story.id == index).map(story => (
+    return stories.filter(story => story.id.toString() === index).map(story => (
         <div key={story.title} className='story-view'>
             <h3>{story.title}</h3>
             <p>{story.description}</p>
@@ -33,10 +31,6 @@ const Story = props => {
         </div>)
     )
 }
-const mapStatetoProps = state => ({
-    stories: state.stories
-})
-
 
 
 export default Story

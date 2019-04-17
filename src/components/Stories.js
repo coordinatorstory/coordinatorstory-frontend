@@ -1,9 +1,7 @@
 import React from 'react'
+import './styles/Stories.css'
 
-import Story from './Story'
-import { getStory, filterStory } from '../actions/actions'
-import { connect } from 'react-redux'
-import { NavLink, Route, Link  } from 'react-router-dom'
+import { Link  } from 'react-router-dom'
 
 const Stories = props => {
     console.log(props)

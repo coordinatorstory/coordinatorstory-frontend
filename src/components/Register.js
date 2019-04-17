@@ -23,9 +23,8 @@ class Register extends React.Component {
 
     register = event => {
         event.preventDefault()
-        this.props.register(this.state)
-
-        // this.setState({
+        // this.props.register(this.state)
+        // if (this.props.status === 201) this.setState({
         //     username: "",
         //     email: "",
         //     password: "",
@@ -35,6 +34,8 @@ class Register extends React.Component {
     }
 
     render = () => {
+        console.log(this.props.status)
+
         return (
         <div>
             <h1>Let's Create Your Profile!</h1>
@@ -101,6 +102,7 @@ const mapStatetoProps = state => ({
     token: state.register.token,
     isRegistering: state.register.isRegistering,
     error: state.register.error,
+    status: state.register.status
 })
   
 export default connect(mapStatetoProps, { register })(Register)
