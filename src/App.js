@@ -17,7 +17,7 @@ class App extends Component {
     super()
     this.state = {
       filteredStories: [],
-      loggedIn: false,
+      signedIn: false,
       selectedCountry: "All Countries",
       countries: ["All Countries", "Bolivia", "Brazil", "Cambodia", "Colombia", "Ecuador", "El Salvador", "Ghana", "Guatemala", "Haiti", "Honduras", "Kiribati", "Madagascar", "Mongolia", "Nicaragua", "Paraguay", "Peru", "Philippines", "Sierra Leone", "Zimbabwe"],
     }
@@ -56,7 +56,7 @@ class App extends Component {
     const country = event.target.value
     this.props.filterStory(country);
     this.setState({
-      selectedCountry: country
+      selectedCountry: country,
     })
   }
 
@@ -71,8 +71,12 @@ class App extends Component {
             <NavLink to='/signup'>Sign Up</NavLink>
           </nav>
 
-          <Route exact path='/' render={() => <Redirect to='/stories' />} />
-          <Route exact path='/stories' render={props => <Stories {...props} {...this.props} {...this.state} filterStoriesByCountry={this.filterStoriesByCountry}/>} />
+          <Route 
+          exact path='/' 
+          render={() => this.state.signedIn ? 
+          <div>"hello"</div> : 
+          <Redirect to='/stories' />} />
+          <Route exact path='/stories' render={props => <Stories {...props} {...this.props} {...this.state} />} />
           <Route path={`/stories/:id`} render={props => <Story {...props} {...this.props}/>}/>
           {/* <Route path={`/stories`} render={props => coordinatorWrapper(props)(Stories)} /> */}
         </div>
