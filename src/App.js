@@ -10,8 +10,6 @@ import './App.css';
 import { getStory, fetchStory } from './actions/actions'
 import { connect } from 'react-redux'
 
-import coordinatorWrapper from './utils/coordinatorWrapper'
-import { all } from 'q';
 
 class App extends Component {
   constructor() {
@@ -74,9 +72,12 @@ class App extends Component {
   }
 }
 
-const mapStatetoProps = state => ({
-  stories: state.stories,
-})
+const mapStatetoProps = state => {
+  console.log(state)
+  return {
+    stories: state.story.stories,
+  }
+} 
 
 export default connect(mapStatetoProps, { getStory, fetchStory })(App)
 

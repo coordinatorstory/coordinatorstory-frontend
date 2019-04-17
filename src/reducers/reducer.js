@@ -1,12 +1,9 @@
-import * as StoryAction from '../actions/actions' 
-const DONOR = 'DONOR';
-const COORDINATOR = 'COORDINATOR';
+import * as StoryAction from '../actions/actions'
 const initialState = {
     stories: [],
     isFetching: false,
     error: '',
-    filteredStories: [],
-    roles: DONOR,
+    filteredStories: []
 }
 
 const staticReducer = (state=initialState, action) => {

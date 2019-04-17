@@ -1,5 +1,8 @@
 import React from 'react'
 
+import { getStory, fetchStory } from '../actions/actions'
+import { connect } from 'react-redux'
+
 class Register extends React.Component {
     constructor() {
         super()
@@ -82,5 +85,9 @@ class Register extends React.Component {
 }
 
 
-export default Register
+const mapStatetoProps = state => ({
+    stories: state.stories,
+})
+  
+export default connect(mapStatetoProps, { getStory, fetchStory })(Register)
 

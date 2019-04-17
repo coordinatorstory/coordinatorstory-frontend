@@ -1,4 +1,3 @@
-import { dispatch } from "../../../../AppData/Local/Microsoft/TypeScript/3.4/node_modules/rxjs/internal/observable/pairs";
 import Axios from "axios";
 
 export const GET_STORY = 'GET_STORY';
