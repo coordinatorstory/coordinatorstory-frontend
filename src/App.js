@@ -18,8 +18,8 @@ class App extends Component {
     this.state = {
       filteredStories: [],
       loggedIn: false,
-      selectedCountry: "All",
-      countries: ["All", "Bolivia", "Brazil", "Cambodia", "Colombia", "Ecuador", "El Salvador", "Ghana", "Guatemala", "Haiti", "Honduras", "Kiribati", "Madagascar", "Mongolia", "Nicaragua", "Paraguay", "Peru", "Philippines", "Sierra Leone", "Zimbabwe"],
+      selectedCountry: "All Countries",
+      countries: ["All Countries", "Bolivia", "Brazil", "Cambodia", "Colombia", "Ecuador", "El Salvador", "Ghana", "Guatemala", "Haiti", "Honduras", "Kiribati", "Madagascar", "Mongolia", "Nicaragua", "Paraguay", "Peru", "Philippines", "Sierra Leone", "Zimbabwe"],
     }
   }
   componentDidMount = () => {
@@ -65,9 +65,11 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <NavLink to='/'>Home</NavLink>
-          <NavLink to='/login'>Log In</NavLink>
-          <NavLink to='/signup'>Sign Up</NavLink>
+          <nav>
+            <NavLink exact to='/'>Home</NavLink>
+            <NavLink to='/login'>Log In</NavLink>
+            <NavLink to='/signup'>Sign Up</NavLink>
+          </nav>
 
           <Route exact path='/' render={() => <Redirect to='/stories' />} />
           <Route exact path='/stories' render={props => <Stories {...props} {...this.props} {...this.state} filterStoriesByCountry={this.filterStoriesByCountry}/>} />

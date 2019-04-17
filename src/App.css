@@ -1,29 +1,113 @@
 .App {
-  /* text-align: center; */
+  position: relative;
+  top: 50px;
+}
+.stories-container {
+  
+}
+.stories-filter {
+  line-height: 2;
+  position: sticky;
+  top: 100px;
+  padding: 15px 0px;
+  width: 100%;
+  text-align: center;
+  text-shadow: 1px 1px 5px #303b50e0;
+  font-size: 1.5em;
+  font-family: sans-serif;
+  color: white;
+  margin: 50px 0px;
 }
 
+.stories-filter select {
+  font-size: 1em;
+  font-family: sans-serif;
+  background: #ffffff00;
+  /* color: white; */
+  /* text-decoration: underline; */
+  border-bottom: solid 2px black;
+}
+:root {
+  background: #8aaae5
+  
+}
+a {
+  cursor: pointer;
+  text-shadow: 1px 1px 5px #303b50e0;
+  font-family: sans-serif;
+  color: white;
+  text-decoration: none;
+}
+a.active {
+  color: #011842;
+  /* text-shadow: 2px 2px 3px #e9e9e900; */
+}
+nav {
+  background: #8aaae5;
+  padding: 15px 0px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 1em;
+  width: 100%;
+  box-shadow: 0px 25px 50px 25px #303b5027;
+}
 
 /* Stories */
 .stories-list {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+ul {
+  padding: 0px;
+}
+li {
+  list-style: none;
+  padding: 20px;
+  margin: 20px;
 }
 
+li a {
+  color: #8aaae5;
+  text-shadow: none;
 
+}
 /* Story */
 
-.Story {
+.story-preview {
+
+  background: white;
   width: 30%;
+  min-width: 300px;
+  box-shadow: 0px 25px 50px 25px #303b5027;
+
+}
+.story-preview a {
+  float: right;
+}
+.story-preview a::before {
+  content: '...';
+}
+
+.story-preview p {
+  line-height: 1.5;
+  overflow: hidden;
+  height: 50px;
+
 }
 
 .Story p {
   overflow: hidden;
 }
 
-.Story * {
+/* .Story * {
   padding: 5px;
-}
+} */
 
 .stories-list .Stories{
   display: block;

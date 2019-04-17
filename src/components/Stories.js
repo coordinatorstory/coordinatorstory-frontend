@@ -8,15 +8,18 @@ import { NavLink, Route, Link  } from 'react-router-dom'
 const Stories = props => {
     console.log(props)
     const { selectedCountry, stories } = props
-    const storiesList = selectedCountry === "All" ? stories : stories.filter(story => story.country === selectedCountry)
+    const storiesList = selectedCountry === "All Countries" ? stories : stories.filter(story => story.country === selectedCountry)
     return (
         <div className='stories-container'>
-            <select 
-            onChange={props.filterStoriesByCountry} 
-            value={props.selectedCountry}
-            placeholder="Select a Country">
-                {props.countries.map(country => <option key={country}>{country}</option>)}
-            </select>
+            <form className="stories-filter">
+                <label>I want to see stories from </label>
+                <select 
+                onChange={props.filterStoriesByCountry} 
+                value={props.selectedCountry}
+                placeholder="Select a Country">
+                    {props.countries.map(country => <option key={country}>{country}</option>)}
+                </select>
+            </form>
             <ul className='stories-list'>
                 {
                     storiesList.map(story => (
