@@ -57,16 +57,16 @@ export const DELETE_USER_STORY_START = 'DELETE_USER_STORY_START';
 export const DELETE_USER_STORY_SUCCESS = 'DELETE_USER_STORY_SUCCESS';
 export const DELETE_USER_STORY_FAILURE = 'DELETE_USER_STORY_FAILURE';
 
-export const deleteUserStories = index => dispatch => {
+export const deleteUserStories = (index, storyid) => dispatch => {
     dispatch({
         type: DELETE_USER_STORY_START
     });
     axiosWithAuth()
-    .delete(`https://ourstory-api.herokuapp.com/api/user/stories`, index)
+    .delete(`https://ourstory-api.herokuapp.com/api/user/stories/${storyid}`)
     .then(res => {
         dispatch({
             type: DELETE_USER_STORY_SUCCESS,
-            newStory: res.data
+            index: index
         })
     })
     .catch(error => {

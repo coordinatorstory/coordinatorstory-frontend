@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUserStories, postUserStories } from '../actions/userStories'
+import { getUserStories, postUserStories, deleteUserStories } from '../actions/userStories'
 import { NavLink } from 'react-router-dom'
 
 class MyStory extends React.Component {
@@ -79,13 +79,13 @@ class MyStory extends React.Component {
                 </form>
                 <ul className='stories-list'>
                 {
-                    this.props.myStories.map(story => (
+                    this.props.myStories.map((story, index) => (
                         <li className='story-preview' key={story.id}>
                             <h3>{story.title}</h3>
                             <p>{story.description}</p>
                             <NavLink to={`/stories/${story.id}`}>Continue Reading</NavLink>
                             <NavLink>Edit</NavLink>
-                            <button>Remove</button>
+                            <button onClick={() => this.props.deleteUserStories(index, story.id)}>Remove</button>
                         </li>
                     ))
                 }
@@ -103,6 +103,6 @@ const mapStatetoProps = state => {
     }
 } 
   
-export default connect(mapStatetoProps, { getUserStories, postUserStories })(MyStory)
+export default connect(mapStatetoProps, { getUserStories, postUserStories, deleteUserStories })(MyStory)
   
 

@@ -40,7 +40,7 @@ const reducer = (state=initialState, action) => {
         return {
             ...state,
             newStory: '',
-            error: 'Failed to get myStories, please try again!',
+            // error: 'Failed to get myStories, please try again!',
             isCreating: false
         }
 
@@ -50,7 +50,7 @@ const reducer = (state=initialState, action) => {
             ...state,
             myStories: [...state.myStories, action.newStory],
             newStory: action.newStory,
-            error: 'Failed to get myStories, please try again!',
+            // error: 'Failed to get myStories, please try again!',
             isCreating: false
         }
 
@@ -59,8 +59,27 @@ const reducer = (state=initialState, action) => {
         return {
             ...state,
             newStory: '',
-            error: 'Failed to get myStories, please try again!',
+            error: 'Failed to post new story, please try again!',
             isCreating: false
+        }
+        
+        case StoryAction.DELETE_USER_STORY_START: 
+        return {
+            ...state
+        }
+
+        
+        case StoryAction.DELETE_USER_STORY_SUCCESS: 
+        return {
+            ...state,
+            myStories: [...state.myStories.slice(0, action.index), ...state.myStories.slice(action.index + 1)]
+        }
+
+        
+        case StoryAction.DELETE_USER_STORY_FAILURE: 
+        return {
+            ...state,
+            error: 'Failed to delete story, please try again!',
         }
 
         default:
