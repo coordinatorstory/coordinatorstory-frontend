@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUserStories } from '../actions/userStories'
+import { getUserStories, postUserStories } from '../actions/userStories'
 import { NavLink } from 'react-router-dom'
 
 class MyStory extends React.Component {
@@ -8,7 +8,7 @@ class MyStory extends React.Component {
         super()
         this.state = {
             Stories: [],
-            selectedCountry: '',
+            selectedCountry: 'Bolivia',
             description: '',
             title: '',
             countries: ["Bolivia", "Brazil", "Cambodia", "Colombia", "Ecuador", "El Salvador", "Ghana", "Guatemala", "Haiti", "Honduras", "Kiribati", "Madagascar", "Mongolia", "Nicaragua", "Paraguay", "Peru", "Philippines", "Sierra Leone", "Zimbabwe"],
@@ -27,7 +27,12 @@ class MyStory extends React.Component {
 
     createStory = event => {
         event.preventDefault()
-        
+        this.props.postUserStories({
+            title: this.state.title,
+            description: this.state.description,
+            country: this.state.selectedCountry
+        })
+
     }
     render = props => {
         return (
@@ -98,6 +103,6 @@ const mapStatetoProps = state => {
     }
 } 
   
-export default connect(mapStatetoProps, { getUserStories })(MyStory)
+export default connect(mapStatetoProps, { getUserStories, postUserStories })(MyStory)
   
 

@@ -3,6 +3,11 @@ const initialState = {
     myStories: [],
     isFetching: false,
     error: '',
+
+    
+    isCreating: false,
+    newStory: '',
+
     filteredStories: []
 }
 
@@ -28,6 +33,34 @@ const reducer = (state=initialState, action) => {
             ...state,
             error: 'Failed to get myStories, please try again!',
             isFetching: false
+        }
+
+        
+        case StoryAction.POST_USER_STORY_START: 
+        return {
+            ...state,
+            newStory: '',
+            error: 'Failed to get myStories, please try again!',
+            isCreating: false
+        }
+
+        
+        case StoryAction.POST_USER_STORY_SUCCESS: 
+        return {
+            ...state,
+            myStories: [...state.myStories, action.newStory],
+            newStory: action.newStory,
+            error: 'Failed to get myStories, please try again!',
+            isCreating: false
+        }
+
+        
+        case StoryAction.POST_USER_STORY_FAILURE: 
+        return {
+            ...state,
+            newStory: '',
+            error: 'Failed to get myStories, please try again!',
+            isCreating: false
         }
 
         default:
