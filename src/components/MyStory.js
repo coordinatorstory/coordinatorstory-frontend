@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getUserStories, postUserStories, deleteUserStories, putUserStories } from '../actions/userStories'
 import { NavLink, Redirect } from 'react-router-dom'
+import './styles/MyStory.css'
 
 class MyStory extends React.Component {
     constructor() {
@@ -104,7 +105,7 @@ class MyStory extends React.Component {
     render = props => {
         return (
             <div>
-                <form className="stories-filter signin-view">
+                <form className="story-form">
                     <label>Story Editor</label>
                     
                     <input 
