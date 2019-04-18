@@ -6,6 +6,7 @@ const initialState = {
     isRegistering: false,
     error: '',
     status: null,
+    currentUser: null
 }
 
 
@@ -17,7 +18,8 @@ const register = (state=initialState, action) => {
             message: 'Creating Your Profile ...',
             token: '',
             error: '',
-            isRegistering: true
+            isRegistering: true,
+            currentUser: null
         }
 
         case REGISTER_SUCCESS: 
@@ -26,7 +28,8 @@ const register = (state=initialState, action) => {
             token: action.token,
             error: '',
             isRegistering: false,
-            status: action.status
+            status: action.status,
+            currentUser: action.username
         }
 
         case REGISTER_FAILURE: 
@@ -35,7 +38,8 @@ const register = (state=initialState, action) => {
             token: '',
             error: action.error,
             status: action.status,
-            isRegistering: false
+            isRegistering: false,
+            currentUser: null
         }
 
         default:

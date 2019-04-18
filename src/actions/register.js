@@ -16,7 +16,8 @@ export const register = newUser => dispatch => {
             type: REGISTER_SUCCESS,
             message: res.data.message,
             status: res.status,
-            token: res.data.token
+            token: res.data.token,
+            currentUser: newUser.username
         })
     })
     .catch(err => {
@@ -25,7 +26,8 @@ export const register = newUser => dispatch => {
             type: REGISTER_FAILURE,
             message: err.message,
             error: err.response ? err.response.data.error : 'unknown error, please try again',
-            status: err.response ? err.response.status : 'unknown status'
+            status: err.response ? err.response.status : 'unknown status',
+            currentUser: null
         })
     })
 } 

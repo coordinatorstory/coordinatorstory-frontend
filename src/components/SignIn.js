@@ -27,10 +27,7 @@ class SignIn extends React.Component {
 
         event.preventDefault()
         this.props.login(this.state)
-        .then(() => {
-            this.props.signIn(this.state.username)
-            return <Redirect to={`/${this.state.username}`} />
-        });
+        
     }
     
     render = props => {

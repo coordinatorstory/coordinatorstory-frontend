@@ -6,7 +6,7 @@ const initialState = {
     isLoggingIn: false,
     error: '',
     status: null,
-    currentUser: ''
+    currentUser: null
 }
 
 

@@ -1,6 +1,6 @@
-import * as StoryAction from '../actions/actions'
+import * as StoryAction from '../actions/userStories'
 const initialState = {
-    stories: [],
+    myStories: [],
     isFetching: false,
     error: '',
     filteredStories: []
@@ -8,7 +8,7 @@ const initialState = {
 
 const reducer = (state=initialState, action) => {
     switch(action.type) {
-        case StoryAction.FETCH_STORY_START: 
+        case StoryAction.FETCH_USER_STORY_START: 
         console.log(action)
         return {
             ...state,
@@ -16,17 +16,17 @@ const reducer = (state=initialState, action) => {
             isFetching: true
         }
 
-        case StoryAction.FETCH_STORY_SUCCESS: 
+        case StoryAction.FETCH_USER_STORY_SUCCESS: 
         return {
-            stories: action.payload,
+            myStories: action.payload,
             error: '',
             isFetching: false
         }
 
-        case StoryAction.FETCH_STORY_FAILURE: 
+        case StoryAction.FETCH_USER_STORY_FAILURE: 
         return {
             ...state,
-            error: 'Failed to get stories, please try again!',
+            error: 'Failed to get myStories, please try again!',
             isFetching: false
         }
 

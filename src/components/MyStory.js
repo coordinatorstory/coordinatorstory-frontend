@@ -1,23 +1,91 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getUserStories } from '../actions/userStories'
+import { NavLink } from 'react-router-dom'
 
 class MyStory extends React.Component {
     constructor() {
         super()
         this.state = {
-            Stories: []
+            Stories: [],
+            selectedCountry: '',
+            description: '',
+            title: '',
+            countries: ["Bolivia", "Brazil", "Cambodia", "Colombia", "Ecuador", "El Salvador", "Ghana", "Guatemala", "Haiti", "Honduras", "Kiribati", "Madagascar", "Mongolia", "Nicaragua", "Paraguay", "Peru", "Philippines", "Sierra Leone", "Zimbabwe"],
         }
     }
     
     componentDidMount() {
         this.props.getUserStories()
     }
+    editStory = event => {
+        this.setState({
+            [event.target.name]:event.target.value
+        })
+        console.dir(this.state)
+    }
 
+    createStory = event => {
+        event.preventDefault()
+        
+    }
     render = props => {
-        console.dir(this.props)
         return (
-            <div>Hi</div>
+            <div>
+                <form className="stories-filter signin-view">
+                    <label>Create New Story</label>
+                    
+                    
+                    <input 
+                        type='text'
+                        placeholder='Title'
+                        minLength='3' 
+                        required
+                        value={this.state.title}
+                        onChange={this.editStory}
+                        name='title'
+                    />           
+
+
+                    <select 
+                        onChange={this.editStory}
+                        value={this.state.selectedCountry}
+                        placeholder="Select a Country"
+                        name='selectedCountry'
+                    >
+                        {this.state.countries.map(country => <option key={country}>{country}</option>)}
+                    </select>
+
+
+                    <textarea
+                    
+                        type='text'
+                        placeholder='description'
+                        minLength='3' 
+                        required
+                        value={this.state.description}
+                        onChange={this.editStory}
+                        name='description'
+                    >
+
+                    </textarea>
+
+                    <button onClick={this.createStory}>Create Story</button>
+                </form>
+                <ul className='stories-list'>
+                {
+                    this.props.myStories.map(story => (
+                        <li className='story-preview' key={story.id}>
+                            <h3>{story.title}</h3>
+                            <p>{story.description}</p>
+                            <NavLink to={`/stories/${story.id}`}>Continue Reading</NavLink>
+                            <NavLink>Edit</NavLink>
+                            <button>Remove</button>
+                        </li>
+                    ))
+                }
+                </ul>
+            </div>
         )
     }
 } 
@@ -26,7 +94,7 @@ class MyStory extends React.Component {
 const mapStatetoProps = state => {
     console.log(state)
     return {
-        stories: state.userStory.stories,
+        myStories: state.userStory.myStories,
     }
 } 
   

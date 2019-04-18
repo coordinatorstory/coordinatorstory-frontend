@@ -10,8 +10,6 @@ import './App.css';
 import { getStory, fetchStory } from './actions/actions'
 import { connect } from 'react-redux'
 import SignIn from './components/SignIn';
-import PrivateRoute from './components/LogedIn';
-import PrivateHome from './components/Coordinator';
 import MyStory from './components/MyStory';
 
 class App extends Component {
@@ -19,8 +17,6 @@ class App extends Component {
     super()
     this.state = {
       filteredStories: [],
-      currentUser:'',
-      signedIn: false,
       selectedCountry: "All Countries",
       countries: ["All Countries", "Bolivia", "Brazil", "Cambodia", "Colombia", "Ecuador", "El Salvador", "Ghana", "Guatemala", "Haiti", "Honduras", "Kiribati", "Madagascar", "Mongolia", "Nicaragua", "Paraguay", "Peru", "Philippines", "Sierra Leone", "Zimbabwe"],
     }
@@ -37,13 +33,6 @@ class App extends Component {
     })
   }
 
-  signIn = username => {
-    this.setState({ 
-      signedIn: true,
-      currentUser: username 
-    })
-    console.dir(this.state)
-  }
 
   render() {
     // console.log(this.props)
@@ -52,9 +41,9 @@ class App extends Component {
         <div className="App">
           <nav>
             <NavLink exact to='/stories'>Stories</NavLink>
-            {this.state.signedIn ? 
+            {this.props.currentUser ? 
             <span>
-              <NavLink to={`/${this.state.currentUser}/stories`}>My Stories</NavLink>
+              <NavLink to={`/mystories`}>My Stories</NavLink>
             </span> :
             <span>
               <NavLink to='/login'>Log In</NavLink>
@@ -79,22 +68,35 @@ class App extends Component {
 
 
           {/* <PrivateRoute path='/protected' component={PrivateHome} /> */}
-          <Route exact path='/:user/stories' render={ props => <MyStory {...props} {...this.state}/> } />
+          <Route exact path='/mystories' render={ props =>
+          <MyStory {...props} {...this.props}/> 
+          
+          // {
+          //   if (this.props.currentUser) return <MyStory {...props} {...this.props}/>
+          //   else return <Redirect to='/' />} 
+          } 
+          />
           
           {/* <Route path='/' /> */}
           <Route path='/login' render={ props => { 
-            if (this.state.signedIn) {
+            if (this.props.currentUser) {
               return <Redirect to='/' /> 
             } else {
-              return <SignIn {...props} {...this.state} signIn={this.signIn}/>
+              return <SignIn 
+              {...props} 
+              // {...this.state} 
+              />
             }
           }}/>
 
           <Route path='/signup' render={ props => { 
-            if (this.state.signedIn) {
+            if (this.props.newUser) {
               return <Redirect to='/' />
             } else {
-              return <Register {...props} {...this.state} signIn={this.signIn}/>
+              return <Register 
+              {...props} 
+              // {...this.state} 
+              />
             }
           }}/>
         </div>
@@ -107,9 +109,13 @@ const mapStatetoProps = state => {
   console.log(state)
   return {
     stories: state.story.stories,
+    currentUser: state.login.currentUser,
+    newUser: state.register.currentUser,
+    myStories: state.userStory.myStories,
+
   }
 } 
 
-export default connect(mapStatetoProps, { getStory, fetchStory })(App)
+export default connect(mapStatetoProps, { fetchStory })(App)
 
 // export default App;
