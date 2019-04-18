@@ -18,8 +18,8 @@ const PrivateRoute = ({ component: Component, errorStatusCode, ...rest }) => {
   );
 };
 
-const mapStateToProps = ({ errorStatusCode }) => ({
-  errorStatusCode
+const mapStateToProps = state => ({
+    errorStatusCode: 401
 });
 
 export default connect(

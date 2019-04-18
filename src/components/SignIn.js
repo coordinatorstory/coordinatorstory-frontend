@@ -4,6 +4,9 @@ import './styles/Register.css'
 import { login } from '../actions/login'
 import { connect } from 'react-redux'
 
+import { Redirect } from 'react-router-dom'
+
+
 class SignIn extends React.Component {
     constructor() {
         super()
@@ -20,15 +23,17 @@ class SignIn extends React.Component {
     }
 
     signIn = event => {
+        console.dir(this.props)
+
         event.preventDefault()
         this.props.login(this.state)
         .then(() => {
-            this.props.history.push('/');
+            this.props.signIn(this.state.username)
+            return <Redirect to={`/${this.state.username}`} />
         });
     }
     
     render = props => {
-        // console.log(this.props.status)
 
         return (
         <div className="signin-view">

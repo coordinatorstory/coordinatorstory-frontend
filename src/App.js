@@ -10,13 +10,16 @@ import './App.css';
 import { getStory, fetchStory } from './actions/actions'
 import { connect } from 'react-redux'
 import SignIn from './components/SignIn';
-
+import PrivateRoute from './components/LogedIn';
+import PrivateHome from './components/Coordinator';
+import MyStory from './components/MyStory';
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       filteredStories: [],
+      currentUser:'',
       signedIn: false,
       selectedCountry: "All Countries",
       countries: ["All Countries", "Bolivia", "Brazil", "Cambodia", "Colombia", "Ecuador", "El Salvador", "Ghana", "Guatemala", "Haiti", "Honduras", "Kiribati", "Madagascar", "Mongolia", "Nicaragua", "Paraguay", "Peru", "Philippines", "Sierra Leone", "Zimbabwe"],
@@ -34,22 +37,35 @@ class App extends Component {
     })
   }
 
+  signIn = username => {
+    this.setState({ 
+      signedIn: true,
+      currentUser: username 
+    })
+    console.dir(this.state)
+  }
+
   render() {
     // console.log(this.props)
     return (
       <Router>
         <div className="App">
           <nav>
-            <NavLink exact to='/'>Home</NavLink>
-            <NavLink to='/login'>Log In</NavLink>
-            <NavLink to='/signup'>Sign Up</NavLink>
+            <NavLink exact to='/stories'>Stories</NavLink>
+            {this.state.signedIn ? 
+            <span>
+              <NavLink to={`/${this.state.currentUser}/stories`}>My Stories</NavLink>
+            </span> :
+            <span>
+              <NavLink to='/login'>Log In</NavLink>
+              <NavLink to='/signup'>Sign Up</NavLink>
+            </span>
+            }
           </nav>
 
           <Route 
           exact path='/' 
-          render={() => this.state.signedIn ? 
-          <div>"hello"</div> : 
-          <Redirect to='/stories' />} />
+          render={() => <Redirect to='/stories' />} />
           <Route 
           exact path='/stories' 
           render={
@@ -60,17 +76,27 @@ class App extends Component {
             filterStoriesByCountry={this.filterStoriesByCountry} />} 
           />
           <Route path='/stories/:id' render={props => <Story {...props} {...this.props}/>}/> 
-          <Route path='/signup' render={ props => this.state.signedIn ?
-            <Redirect to='/' /> :
-            <Register {...props} {...this.state} />
-          }/>
 
+
+          {/* <PrivateRoute path='/protected' component={PrivateHome} /> */}
+          <Route exact path='/:user/stories' render={ props => <MyStory {...props} {...this.state}/> } />
           
-          
-          <Route path='/login' render={ props => this.state.signedIn ?
-            <Redirect to='/' /> :
-            <SignIn {...props} {...this.state} />
-          } />
+          {/* <Route path='/' /> */}
+          <Route path='/login' render={ props => { 
+            if (this.state.signedIn) {
+              return <Redirect to='/' /> 
+            } else {
+              return <SignIn {...props} {...this.state} signIn={this.signIn}/>
+            }
+          }}/>
+
+          <Route path='/signup' render={ props => { 
+            if (this.state.signedIn) {
+              return <Redirect to='/' />
+            } else {
+              return <Register {...props} {...this.state} signIn={this.signIn}/>
+            }
+          }}/>
         </div>
       </Router>
     );

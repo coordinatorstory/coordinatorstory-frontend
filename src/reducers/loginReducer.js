@@ -6,6 +6,7 @@ const initialState = {
     isLoggingIn: false,
     error: '',
     status: null,
+    currentUser: ''
 }
 
 
@@ -14,7 +15,7 @@ const login = (state=initialState, action) => {
         case LOGIN_START: 
         console.log(action)
         return {
-            message: 'Creating Your Profile ...',
+            message: 'Going to Your Profile, Please Wait ...',
             token: '',
             error: '',
             isLoggingIn: true
@@ -26,7 +27,8 @@ const login = (state=initialState, action) => {
             token: action.token,
             error: '',
             isLoggingIn: false,
-            status: action.status
+            status: action.status,
+            currentUser: action.user
         }
 
         case LOGIN_FAILURE: 

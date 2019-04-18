@@ -17,7 +17,8 @@ export const login = user => dispatch => {
             type: LOGIN_SUCCESS,
             message: res.data.message,
             status: res.status,
-            token: res.data.token
+            token: res.data.token,
+            user: user
         })
     })
     .catch(err => {
