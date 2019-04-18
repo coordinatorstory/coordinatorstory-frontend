@@ -2,6 +2,7 @@ import Axios from 'axios'
 export const LOGIN_START = 'LOGIN_START'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+export const LOGOUT = 'LOGOUT'
 
 export const login = user => dispatch => {
     // console.log(newUser)
@@ -32,3 +33,11 @@ export const login = user => dispatch => {
         })
     })
 } 
+
+export const signOut = () => dispatch => {
+    // console.log(newUser)
+    localStorage.clear();
+    dispatch({
+        type: LOGOUT
+    })
+}

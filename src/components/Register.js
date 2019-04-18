@@ -23,7 +23,15 @@ class Register extends React.Component {
 
     register = event => {
         event.preventDefault()
-        this.props.register(this.state)
+        this.props.register(this.state).then(success => {
+            if (success) this.setState({
+                username: "",
+                email: "",
+                password: "",
+                first_name: "",
+                last_name: "",
+            })
+        })
     }
 
     render = () => {

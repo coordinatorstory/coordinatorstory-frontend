@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, NavLink, Route, Redirect  } from 'react-router-dom';
 
 import Stories from './components/Stories'
-import Story from './components/Story'
+import { Story, StoryEditor } from './components/Story'
 import Register from './components/Register'
 
 import './App.css';
 
 import { getStory, fetchStory } from './actions/actions'
+import { signOut } from './actions/login'
 import { connect } from 'react-redux'
 import SignIn from './components/SignIn';
 import MyStory from './components/MyStory';
@@ -33,6 +34,10 @@ class App extends Component {
     })
   }
 
+  SignOut = () => {
+    this.props.signOut()
+    return <Redirect to='/' ></Redirect>
+  }
 
   render() {
     // console.log(this.props)
@@ -41,15 +46,17 @@ class App extends Component {
         <div className="App">
           <nav>
             <NavLink exact to='/stories'>Stories</NavLink>
-            {this.props.currentUser ? 
-            <span>
-              <NavLink to={`/mystories`}>My Stories</NavLink>
-            </span> :
-            <span>
+            {localStorage.token ? 
+              <NavLink to={`/mystories`}>My Stories</NavLink> :
               <NavLink to='/login'>Log In</NavLink>
-              <NavLink to='/signup'>Sign Up</NavLink>
-            </span>
             }
+            
+            {localStorage.token ? 
+              <button onClick={this.SignOut}>Sign Out</button> :
+              <NavLink to='/signup'>Sign Up</NavLink>
+            }
+
+
           </nav>
 
           <Route 
@@ -64,27 +71,20 @@ class App extends Component {
             {...this.state}
             filterStoriesByCountry={this.filterStoriesByCountry} />} 
           />
-          <Route path='/stories/:id' render={props => <Story {...props} {...this.props}/>}/> 
+          <Route exact path='/stories/:id' render={props => <Story {...props} {...this.props}/>}/> 
+          <Route path='/stories/:id/edit' render={props => <StoryEditor {...props} {...this.props} {...this.state}/>}/> 
 
-
-          {/* <PrivateRoute path='/protected' component={PrivateHome} /> */}
-          <Route exact path='/mystories' render={ props =>
-          <MyStory {...props} {...this.props}/> 
+          <Route exact path='/mystories' render={ props => { 
+            if (localStorage.token) return <MyStory {...props} {...this.props}/>
+            return <Redirect to='/' />
+          }}/>
           
-          // {
-          //   if (this.props.currentUser) return <MyStory {...props} {...this.props}/>
-          //   else return <Redirect to='/' />} 
-          } 
-          />
-          
-          {/* <Route path='/' /> */}
           <Route path='/login' render={ props => { 
             if (this.props.currentUser) {
               return <Redirect to='/' /> 
             } else {
               return <SignIn 
               {...props} 
-              // {...this.state} 
               />
             }
           }}/>
@@ -95,7 +95,6 @@ class App extends Component {
             } else {
               return <Register 
               {...props} 
-              // {...this.state} 
               />
             }
           }}/>
@@ -116,6 +115,6 @@ const mapStatetoProps = state => {
   }
 } 
 
-export default connect(mapStatetoProps, { fetchStory })(App)
+export default connect(mapStatetoProps, { fetchStory, signOut })(App)
 
 // export default App;

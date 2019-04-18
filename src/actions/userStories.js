@@ -36,13 +36,14 @@ export const postUserStories = newStory => dispatch => {
     dispatch({
         type: POST_USER_STORY_START
     });
-    axiosWithAuth()
+    return axiosWithAuth()
     .post(`https://ourstory-api.herokuapp.com/api/user/stories`, newStory)
     .then(res => {
         dispatch({
             type: POST_USER_STORY_SUCCESS,
             newStory: res.data
         })
+        return true
     })
     .catch(error => {
         dispatch({
@@ -61,12 +62,12 @@ export const deleteUserStories = (index, storyid) => dispatch => {
     dispatch({
         type: DELETE_USER_STORY_START
     });
-    axiosWithAuth()
+    return axiosWithAuth()
     .delete(`https://ourstory-api.herokuapp.com/api/user/stories/${storyid}`)
     .then(res => {
         dispatch({
             type: DELETE_USER_STORY_SUCCESS,
-            index: index
+            index: storyid
         })
     })
     .catch(error => {

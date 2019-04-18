@@ -1,5 +1,5 @@
 // import * as Action from '../actions/register' 
-import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE} from '../actions/login'
+import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT} from '../actions/login'
 const initialState = {
     message: "",
     token: "",
@@ -38,6 +38,16 @@ const login = (state=initialState, action) => {
             error: action.error,
             status: action.status,
             isLoggingIn: false
+        }
+
+        case LOGOUT:
+        return {
+            message: "",
+            token: "",
+            isLoggingIn: false,
+            error: '',
+            status: null,
+            currentUser: null
         }
 
         default:

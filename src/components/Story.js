@@ -1,12 +1,16 @@
 import React from 'react'
 import './styles/Story.css'
 
-const Story = props => {
+export const Story = props => {
     const { match : { params :{ id: index} }, stories } = props;
     return stories.filter(story => story.id.toString() === index).map(story => (
         <div key={story.title} className='story-view'>
             <h3>{story.title}</h3>
+            <h4>{story.country}</h4>
             <p>{story.description}</p>
+            <p>{`Created on ${new Date(story.created_at)}`}</p>
+            <p>{`Updated on ${new Date(story.updated_at)}`}</p>
+
             <form 
             action="https://www.paypal.com/cgi-bin/webscr" 
             method="post" 
@@ -33,4 +37,26 @@ const Story = props => {
 }
 
 
-export default Story
+
+export const StoryEditor = props => {
+    const { match : { params :{ id: index} }, stories } = props;
+    return stories.filter(story => story.id.toString() === index).map(story => (
+        <form key={story.title} className='story-view'>
+            <input value={story.title}/>
+            <select value={story.country} >
+                {
+                    props.countries.map(country => {
+                        // if (country === story.country) return <option selected>{country}</option>
+                        return <option>{country}</option>
+                    })
+                }
+            </select>
+            <textarea value={story.description}/>
+            <p>{`Created on ${new Date(story.created_at)}`}</p>
+            <p>{`Updated on ${new Date(story.updated_at)}`}</p>
+            <button>Update</button>
+        </form>)
+    )
+}
+
+

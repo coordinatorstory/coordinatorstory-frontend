@@ -19,6 +19,7 @@ export const register = newUser => dispatch => {
             token: res.data.token,
             currentUser: newUser.username
         })
+        return true
     })
     .catch(err => {
         console.dir(err)

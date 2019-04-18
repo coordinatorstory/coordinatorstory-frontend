@@ -27,11 +27,20 @@ class MyStory extends React.Component {
 
     createStory = event => {
         event.preventDefault()
+
         this.props.postUserStories({
             title: this.state.title,
             description: this.state.description,
             country: this.state.selectedCountry
-        })
+        }).then(success => {
+            
+            if (success) this.setState({
+                
+                selectedCountry: 'Bolivia',
+                description: '',
+                title: '',
+            })}
+        )
 
     }
     render = props => {
@@ -84,7 +93,7 @@ class MyStory extends React.Component {
                             <h3>{story.title}</h3>
                             <p>{story.description}</p>
                             <NavLink to={`/stories/${story.id}`}>Continue Reading</NavLink>
-                            <NavLink>Edit</NavLink>
+                            <NavLink to={`/stories/${story.id}/edit`}> Edit</NavLink>
                             <button onClick={() => this.props.deleteUserStories(index, story.id)}>Remove</button>
                         </li>
                     ))

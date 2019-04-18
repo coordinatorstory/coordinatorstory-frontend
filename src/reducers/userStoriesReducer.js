@@ -72,7 +72,7 @@ const reducer = (state=initialState, action) => {
         case StoryAction.DELETE_USER_STORY_SUCCESS: 
         return {
             ...state,
-            myStories: [...state.myStories.slice(0, action.index), ...state.myStories.slice(action.index + 1)]
+            myStories: [...state.myStories.filter(story => story.id !== action.index)]
         }
 
         
