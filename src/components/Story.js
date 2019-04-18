@@ -54,7 +54,7 @@ export const StoryEditor = props => {
             <textarea value={story.description}/>
             <p>{`Created on ${new Date(story.created_at)}`}</p>
             <p>{`Updated on ${new Date(story.updated_at)}`}</p>
-            <button>Update</button>
+
         </form>)
     )
 }

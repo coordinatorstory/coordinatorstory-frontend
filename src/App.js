@@ -7,7 +7,7 @@ import Register from './components/Register'
 
 import './App.css';
 
-import { getStory, fetchStory } from './actions/actions'
+import { fetchStory } from './actions/actions'
 import { signOut } from './actions/login'
 import { connect } from 'react-redux'
 import SignIn from './components/SignIn';
@@ -28,7 +28,6 @@ class App extends Component {
 
   filterStoriesByCountry = event => {
     const country = event.target.value
-    // this.props.filterStory(country);
     this.setState({
       selectedCountry: country,
     })
@@ -55,8 +54,6 @@ class App extends Component {
               <button onClick={this.SignOut}>Sign Out</button> :
               <NavLink to='/signup'>Sign Up</NavLink>
             }
-
-
           </nav>
 
           <Route 
@@ -117,4 +114,3 @@ const mapStatetoProps = state => {
 
 export default connect(mapStatetoProps, { fetchStory, signOut })(App)
 
-// export default App;

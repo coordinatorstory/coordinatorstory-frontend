@@ -77,3 +77,30 @@ export const deleteUserStories = (index, storyid) => dispatch => {
         })
     })
 }
+
+export const PUT_USER_STORY_START = 'PUT_USER_STORY_START';
+export const PUT_USER_STORY_SUCCESS = 'PUT_USER_STORY_SUCCESS';
+export const PUT_USER_STORY_FAILURE = 'PUT_USER_STORY_FAILURE';
+
+export const putUserStories = (storyid, story) => dispatch => {
+    dispatch({
+        type: PUT_USER_STORY_START
+    });
+    return axiosWithAuth()
+    .put(`https://ourstory-api.herokuapp.com/api/user/stories/${storyid}`, story)
+    .then(res => {
+        console.dir(res)
+        dispatch({
+            type: PUT_USER_STORY_SUCCESS,
+            index: storyid,
+            updatedStory: story
+        })
+        return true
+    })
+    .catch(error => {
+        dispatch({
+            type: PUT_USER_STORY_FAILURE,
+            error: error
+        })
+    })
+}

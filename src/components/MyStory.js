@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUserStories, postUserStories, deleteUserStories } from '../actions/userStories'
+import { getUserStories, postUserStories, deleteUserStories, putUserStories } from '../actions/userStories'
 import { NavLink } from 'react-router-dom'
 
 class MyStory extends React.Component {
@@ -8,6 +8,8 @@ class MyStory extends React.Component {
         super()
         this.state = {
             Stories: [],
+            storyId: null,
+            selectedStory: null,
             selectedCountry: 'Bolivia',
             description: '',
             title: '',
@@ -18,7 +20,7 @@ class MyStory extends React.Component {
     componentDidMount() {
         this.props.getUserStories()
     }
-    editStory = event => {
+    editingStory = event => {
         this.setState({
             [event.target.name]:event.target.value
         })
@@ -43,12 +45,62 @@ class MyStory extends React.Component {
         )
 
     }
+
+    saveStory = event => {
+        event.preventDefault()
+
+        if (this.state.storyId) {
+            this.props.putUserStories(
+                this.state.storyId, {
+                title: this.state.title,
+                description: this.state.description,
+                country: this.state.selectedCountry
+            }).then(success => {
+                
+                if (success) this.clearForm()
+            })
+        } else {
+            
+            this.props.postUserStories({
+                title: this.state.title,
+                description: this.state.description,
+                country: this.state.selectedCountry
+            }).then(success => {
+                
+                if (success) this.clearForm()
+
+            })
+        }
+    }
+
+    editStory = storyId => {
+        // event.preventDefault()
+        // console.log(storyId)
+        const selectedStory = this.props.myStories.filter(story => story.id === storyId)[0]
+
+        this.setState({
+            storyId: storyId,
+            selectedCountry: selectedStory.country,
+            title: selectedStory.title,
+            description: selectedStory.description
+        })
+        // console.dir(selectedStory)
+    }
+
+    clearForm = event => {
+        if (event) event.preventDefault()
+        this.setState({
+            storyId: null,                    
+            selectedCountry: 'Bolivia',
+            description: '',
+            title: '',
+        })
+    }
     render = props => {
         return (
             <div>
                 <form className="stories-filter signin-view">
-                    <label>Create New Story</label>
-                    
+                    <label>Story Editor</label>
                     
                     <input 
                         type='text'
@@ -56,13 +108,12 @@ class MyStory extends React.Component {
                         minLength='3' 
                         required
                         value={this.state.title}
-                        onChange={this.editStory}
+                        onChange={this.editingStory}
                         name='title'
                     />           
 
-
                     <select 
-                        onChange={this.editStory}
+                        onChange={this.editingStory}
                         value={this.state.selectedCountry}
                         placeholder="Select a Country"
                         name='selectedCountry'
@@ -70,21 +121,20 @@ class MyStory extends React.Component {
                         {this.state.countries.map(country => <option key={country}>{country}</option>)}
                     </select>
 
-
                     <textarea
-                    
                         type='text'
                         placeholder='description'
                         minLength='3' 
                         required
                         value={this.state.description}
-                        onChange={this.editStory}
+                        onChange={this.editingStory}
                         name='description'
                     >
 
                     </textarea>
+                    <button onClick={this.saveStory}>Save</button>
+                    <button onClick={this.clearForm}>Clear</button>
 
-                    <button onClick={this.createStory}>Create Story</button>
                 </form>
                 <ul className='stories-list'>
                 {
@@ -93,7 +143,8 @@ class MyStory extends React.Component {
                             <h3>{story.title}</h3>
                             <p>{story.description}</p>
                             <NavLink to={`/stories/${story.id}`}>Continue Reading</NavLink>
-                            <NavLink to={`/stories/${story.id}/edit`}> Edit</NavLink>
+                            {/* <NavLink to={`/stories/${story.id}/edit`}> Edit</NavLink> */}
+                            <button onClick={() => this.editStory(story.id)}>Edit</button>
                             <button onClick={() => this.props.deleteUserStories(index, story.id)}>Remove</button>
                         </li>
                     ))
@@ -112,6 +163,6 @@ const mapStatetoProps = state => {
     }
 } 
   
-export default connect(mapStatetoProps, { getUserStories, postUserStories, deleteUserStories })(MyStory)
+export default connect(mapStatetoProps, { getUserStories, postUserStories, deleteUserStories, putUserStories })(MyStory)
   
 
