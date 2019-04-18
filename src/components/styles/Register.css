@@ -5,7 +5,7 @@
 
 .register-view form, .signin-view  form {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: stretch;
     flex-direction: column;
     height: 400px;
@@ -13,8 +13,10 @@
     min-width: 300px;
     width: 30%;
     margin: auto;
+
 }
 
 .register-view form input, button, p , .signin-view form input, button, p  {
     padding: 10px;
+    margin: 10px;
 }

@@ -22,6 +22,9 @@ class SignIn extends React.Component {
     signIn = event => {
         event.preventDefault()
         this.props.login(this.state)
+        .then(() => {
+            this.props.history.push('/');
+        });
     }
     
     render = props => {

@@ -28,7 +28,7 @@ class App extends Component {
 
   filterStoriesByCountry = event => {
     const country = event.target.value
-    this.props.filterStory(country);
+    // this.props.filterStory(country);
     this.setState({
       selectedCountry: country,
     })

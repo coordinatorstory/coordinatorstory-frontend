@@ -8,7 +8,7 @@ export const register = newUser => dispatch => {
     dispatch({
         type: REGISTER_START
     });
-    Axios
+    return Axios
     .post('https://ourstory-api.herokuapp.com/api/auth/register', newUser)
     .then(res => {
         console.dir(res)

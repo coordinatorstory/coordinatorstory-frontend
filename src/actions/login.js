@@ -9,10 +9,10 @@ export const login = user => dispatch => {
         type: LOGIN_START
     });
     
-    Axios.post('https://ourstory-api.herokuapp.com/api/auth/login', user)
+    return Axios.post('https://ourstory-api.herokuapp.com/api/auth/login', user)
     .then(res => {
-        console.dir(res)
-        
+        // console.dir(res)
+        localStorage.setItem('token', res.data.token);
         dispatch({
             type: LOGIN_SUCCESS,
             message: res.data.message,
