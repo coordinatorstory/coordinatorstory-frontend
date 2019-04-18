@@ -81,6 +81,24 @@ const reducer = (state=initialState, action) => {
             ...state,
             error: 'Failed to delete story, please try again!',
         }
+        case StoryAction.PUT_USER_STORY_START: 
+        return {
+            ...state
+        }
+
+        
+        case StoryAction.PUT_USER_STORY_SUCCESS: 
+        return {
+            ...state,
+            // myStories: [...state.myStories.filter(story => story.id !== action.index), action.updatedStory]
+        }
+
+        
+        case StoryAction.PUT_USER_STORY_FAILURE: 
+        return {
+            ...state,
+            error: 'Failed to update story, please try again!',
+        }
 
         default:
         return state

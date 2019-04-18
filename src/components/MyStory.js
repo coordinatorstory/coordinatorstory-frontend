@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getUserStories, postUserStories, deleteUserStories, putUserStories } from '../actions/userStories'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 
 class MyStory extends React.Component {
     constructor() {
@@ -51,13 +51,17 @@ class MyStory extends React.Component {
 
         if (this.state.storyId) {
             this.props.putUserStories(
+
                 this.state.storyId, {
-                title: this.state.title,
-                description: this.state.description,
-                country: this.state.selectedCountry
-            }).then(success => {
+                    // ...this.state.selectedStory,
+                    title: this.state.title,
+                    description: this.state.description,
+                    country: this.state.selectedCountry
+                }
+            ).then(success => {
                 
                 if (success) this.clearForm()
+                this.props.getUserStories()
             })
         } else {
             
@@ -79,6 +83,7 @@ class MyStory extends React.Component {
         const selectedStory = this.props.myStories.filter(story => story.id === storyId)[0]
 
         this.setState({
+            // selectedStory: selectedStory,
             storyId: storyId,
             selectedCountry: selectedStory.country,
             title: selectedStory.title,
