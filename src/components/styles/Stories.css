@@ -26,8 +26,10 @@ li a {
 .story-preview {
     font-family: sans-serif;
     background: white;
+    border-radius: 25px; 
     width: 30%;
     min-width: 300px;
+    box-shadow: 5px 5px 50px 1px #2f77fd59;
 }
 .story-preview a {
     float: right;

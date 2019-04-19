@@ -106,26 +106,29 @@ class MyStory extends React.Component {
         return (
             <div>
                 <form className="story-form">
-                    <label>Story Editor</label>
-                    
-                    <input 
-                        type='text'
-                        placeholder='Title'
-                        minLength='3' 
-                        required
-                        value={this.state.title}
-                        onChange={this.editingStory}
-                        name='title'
-                    />           
+                    <h5>create & edit your story here</h5>
 
-                    <select 
-                        onChange={this.editingStory}
-                        value={this.state.selectedCountry}
-                        placeholder="Select a Country"
-                        name='selectedCountry'
-                    >
-                        {this.state.countries.map(country => <option key={country}>{country}</option>)}
-                    </select>
+                    <span>
+                        <input 
+                            type='text'
+                            placeholder='Title'
+                            minLength='3' 
+                            required
+                            value={this.state.title}
+                            onChange={this.editingStory}
+                            name='title'
+                        />           
+
+                        <select 
+                            onChange={this.editingStory}
+                            value={this.state.selectedCountry}
+                            placeholder="Select a Country"
+                            name='selectedCountry'
+                        >
+                            {this.state.countries.map(country => <option key={country}>{country}</option>)}
+                        </select>
+                    </span>                   
+
 
                     <textarea
                         type='text'
@@ -138,9 +141,12 @@ class MyStory extends React.Component {
                     >
 
                     </textarea>
-                    <button onClick={this.saveStory}>Save</button>
-                    <button onClick={this.clearForm}>Clear</button>
+                    <span>
 
+                        <button onClick={this.saveStory}>Save</button>
+                        <button onClick={this.clearForm}>Clear</button>
+
+                    </span>
                 </form>
                 <ul className='stories-list'>
                 {
