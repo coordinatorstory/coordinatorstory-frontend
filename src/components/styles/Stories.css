@@ -5,6 +5,10 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     width: 100%;
+    top: 0px;
+    position: relative;
+    bottom: -250px;
+    height: 400px;
 }
 ul {
     padding: 0px;
@@ -30,6 +34,7 @@ li a {
     width: 30%;
     min-width: 300px;
     box-shadow: 5px 5px 50px 1px #2f77fd59;
+
 }
 .story-preview a {
     float: right;
@@ -43,6 +48,12 @@ li a {
     overflow: hidden;
     height: 50px;
 
+}
+
+.story-preview button {
+    margin: 0px 5px;
+    border: none;
+    border-radius: 10px; 
 }
 
 .Story p {
